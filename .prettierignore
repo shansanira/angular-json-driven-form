@@ -1,0 +1,11 @@
+# Add files here to ignore them from prettier formatting
+/dist
+/coverage
+/.nx/cache
+.angular
+.yarn
+/node_modules
+
+# nx cache files
+.nx
+/.nx/workspace-data

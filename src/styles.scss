@@ -1,1 +1,99 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base {
+  :root {
+    /** base colors */
+    --sys-color-base-100: #000;
+    --sys-color-base-85: #4a5568;
+    --sys-color-base-75: #676767;
+    --sys-color-base-50: #848484;
+    --sys-color-base-35: #bebebe;
+    --sys-color-base-25: #ebebeb;
+    --sys-color-base-15: #f2f2f2;
+    --sys-color-base-0: #fff;
+
+    /* main colors */
+    --sys-color-primary: #16423c;
+    --sys-color-secondary: #6a9c89;
+    --sys-color-tertiary: #c4dad2;
+    --sys-color-highlight: #e9efec;
+
+    /* button colors */
+    --sys-color-button-background: var(--sys-color-primary);
+    --sys-color-button-text: var(--sys-color-secondary);
+    --sys-color-button-background-hover: var(--sys-color-secondary);
+    --sys-color-button-text-hover: var(--sys-color-primary);
+
+    /* containers */
+    --sys-color-container-background: var(--sys-color-highlight);
+    --sys-color-container-border: var(--sys-color-base-0);
+
+    /* text colors */
+    --sys-color-text-heading: var(--sys-color-primary);
+    --sys-color-text-subheading: var(--sys-color-primary);
+    --sys-color-text-body: var(--sys-color-base-75);
+    --sys-color-text-anchor: var(--sys-color-secondary);
+    --sys-color-text-description: var(--sys-color-base-35);
+
+    /* error */
+    --sys-color-error: #ef3131;
+    --sys-color-error-subtle: #fdeaea;
+    --sys-color-error-light: #f58383;
+    --sys-color-error-dark: #a20000;
+
+    /* warning */
+    --sys-color-warning: #f8c32d;
+    --sys-color-warning-subtle: #fef9ea;
+    --sys-color-warning-light: #fbdb81;
+    --sys-color-warning-dark: #ac7600;
+
+    /* success */
+    --sys-color-success: #16ba5f;
+    --sys-color-success-subtle: #e8f8ef;
+    --sys-color-success-light: #73d69f;
+    --sys-color-success-dark: #006d13;
+
+    /* info */
+    --sys-color-info: #2d8eff;
+    --sys-color-info-subtle: #eaf4ff;
+    --sys-color-info-light: #81bbff;
+    --sys-color-info-dark: #0042b2;
+
+    /* form fields */
+    --sys-color-field-label: var(--sys-color-primary);
+    --sys-color-field-border: var(--sys-color-primary);
+    --sys-color-field-help-text: var(--sys-color-text-description);
+    --sys-field-border-radius: 0;
+    --sys-field-label-font-size: 16px;
+    --sys-field-help-text-font-size: 14px;
+    --sys-field-label-font-weight: 500;
+
+    /* progress bar */
+    --sys-color-progress: var(--sys-color-base-15);
+    --sys-color-progress-bar-handle: var(--sys-color-primary);
+
+    /* typography */
+    --sys-font-family-heading: 'Roboto', sans-serif;
+    --sys-font-family-text: 'Inter', 'Roboto', sans-serif;
+
+    /* font sizes */
+    --sys-font-size-heading: 40px;
+    --sys-font-size-subheading1: 28px;
+    --sys-font-size-subheading2: 24px;
+    --sys-font-size-subheading3: 20px;
+    --sys-font-size-text: 16px;
+
+    /* font weights */
+    --sys-font-weight-heading: 600;
+    --sys-font-weight-subheading: 500;
+    --sys-font-weight-text: 400;
+
+    /* line heights */
+    --sys-line-height-heading: 1.3;
+    --sys-line-height-text: 1.5;
+  }
+}
+
+@layer theme;
