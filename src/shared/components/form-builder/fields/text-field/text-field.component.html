@@ -1,0 +1,24 @@
+@if (control) {
+  <app-form-field
+    [formField]="formField()"
+    [showError]="control.invalid && control.touched && control.dirty"
+    [errors]="control.errors"
+    [inputField]="inputFieldRef"
+    [icon]="icon()"
+    [labelBefore]="labelBefore()"
+  >
+    <input
+      [id]="formField().id"
+      [formControl]="control"
+      [type]="formField().htmlInputType"
+      [ngClass]="getErrorClass()"
+      [readonly]="formField().readonly"
+      [attr.maxlength]="formField().length"
+      [attr.aria-describedby]="getAriaDescribedBy()"
+      [attr.pattern]="formField().pattern"
+      (input)="formatToPattern($event)"
+      class="w-full rounded-field"
+      #inputField
+    />
+  </app-form-field>
+}

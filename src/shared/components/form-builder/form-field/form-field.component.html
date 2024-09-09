@@ -1,0 +1,49 @@
+<fieldset class="mb-3 flex w-full flex-col">
+  <label
+    [for]="formField().id"
+    class="leadeing-base cursor-pointer text-field-label font-field-label text-label"
+    [ngClass]="{ 'mb-2': !formField().explanation }"
+    >{{ formField().label }}</label
+  >
+  @if (formField().explanation) {
+    <p [id]="formField().id + '-help'" class="mb-2 text-help-text text-field-help">{{ formField().explanation }}</p>
+  }
+  <div class="relative flex w-full items-center">
+    @if (!formField().validators.required) {
+      <span #dynamicLabelRight class="absolute bottom-full right-0 text-sm text-label">optional</span>
+    }
+    @if (icon()) {
+      <ng-icon
+        [attr.aria-describedby]="formField().id"
+        class="absolute top-1/2 -translate-y-1/2 cursor-pointer text-field-help"
+        [ngClass]="iconSide() === 'left' ? 'left-2' : 'right-2'"
+        [name]="icon()"
+        size="22"
+        (click)="focusInput()"
+      ></ng-icon>
+    }
+    @if (labelBefore()) {
+      <span role="label" #dynamicLabelLeft class="absolute left-2 top-1/2 -translate-y-1/2 text-field-help">{{
+        labelBefore()
+      }}</span>
+    }
+    <ng-content></ng-content>
+    @if (formField().labelAfter) {
+      <span
+        role="label"
+        #dynamicLabelRight
+        class="absolute right-2 top-1/2 -translate-y-[55%] cursor-pointer text-base text-field-help"
+        >{{ formField().labelAfter }}
+      </span>
+    }
+  </div>
+  @if (formField().placeholder) {
+    <p class="text-help-text text-field-help">
+      {{ formField().placeholder }}
+    </p>
+  }
+
+  @if (showError()) {
+    <ipx-validation-errors [id]="formField().id + '-error'" [controlLabel]="formField().label" [errors]="errors()" />
+  }
+</fieldset>

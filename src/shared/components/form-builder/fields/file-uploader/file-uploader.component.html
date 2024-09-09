@@ -1,0 +1,44 @@
+@if (control) {
+  <app-form-field
+    [formField]="formField()"
+    [showError]="control.invalid && control.touched && control.dirty"
+    [errors]="control.errors"
+  >
+    <div
+      class="flex h-40 w-full flex-col items-center justify-center rounded-field border-2 border-dashed"
+      [ngClass]="getErrorClass()"
+      [attr.aria-describedby]="getAriaDescribedBy()"
+      appDrag
+      (filesChange)="filesDropped($event)"
+    >
+      <label [for]="formField().id" class="flex flex-col items-center justify-center">
+        <ng-icon
+          [attr.aria-describedby]="formField().id"
+          class="cursor-pointer text-field-help"
+          name="heroDocumentPlusSolid"
+          size="60"
+        ></ng-icon>
+        <p class="leadeing-base text-field-label text-label">
+          <span class="pointer-events-none">Drag a file or</span>
+          <span class="cursor-pointer font-semibold hover:underline">choose a file</span>
+        </p>
+      </label>
+      <p class="text-sm text-field-help">
+        {{ 'Up to ' + getFormattedFileSize(formField().maximumSize ?? 0) }}
+      </p>
+    </div>
+    <input
+      [id]="formField().id"
+      class="hidden"
+      type="file"
+      [accept]="formField().fileTypes"
+      (change)="onFileChange($event)"
+      [readonly]="formField().readonly"
+      [attr.aria-describedby]="getAriaDescribedBy()"
+      [attr.multiple]="(formField().minimumCount ?? 0) > 1"
+    />
+  </app-form-field>
+}
+@if (files().files.length) {
+  <app-upload-list [files]="files().files"></app-upload-list>
+}

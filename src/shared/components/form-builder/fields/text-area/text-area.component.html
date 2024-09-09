@@ -1,0 +1,20 @@
+@if (control) {
+  <app-form-field
+    [formField]="formField()"
+    [showError]="control.invalid && control.touched && control.dirty"
+    [errors]="control.errors"
+  >
+    <textarea
+      type="textarea"
+      [id]="formField().id"
+      [formControl]="control"
+      [ngClass]="getErrorClass()"
+      [rows]="formField().lines"
+      [readonly]="formField().readonly"
+      [attr.maxlength]="formField().length"
+      [attr.aria-describedby]="getAriaDescribedBy()"
+      class="w-full rounded-field"
+    >
+    </textarea>
+  </app-form-field>
+}

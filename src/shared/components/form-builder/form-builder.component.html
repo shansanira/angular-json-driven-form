@@ -1,0 +1,63 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  @for (step of formData().steps; track step.id; let index = $index) {
+    <div>
+      @if (index === currentStepIndex) {
+        <h1 class="mb-4 text-2xl font-semibold">{{ step.label }}</h1>
+
+        @for (block of step?.blocks; track block.id; let index = $index) {
+          <div class="mb-8">
+            <h2 class="mb-2 text-xl font-semibold underline">{{ block.alias }}</h2>
+            @for (field of block.fields; track field.id; let index = $index) {
+              @switch (field.fieldType) {
+                @case ('TextField') {
+                  @if (field.lines && field.lines > 1) {
+                    <app-text-area [formField]="field" [formControlName]="field.name"></app-text-area>
+                  } @else {
+                    <app-text-field [formField]="field" [formControlName]="field.name"></app-text-field>
+                  }
+                }
+                @case ('UploadField') {
+                  <app-file-uploader
+                    [formField]="field"
+                    [formControlName]="field.name"
+                    (filesChange)="onFileDrop($event)"
+                  ></app-file-uploader>
+                }
+              }
+            }
+          </div>
+        }
+      }
+    </div>
+  }
+  @if (formData().steps.length) {
+    <div class="buttons">
+      @if (currentStepIndex > 0) {
+        <button
+          type="button"
+          class="mr-3 bg-button px-8 py-3 font-semibold text-button-text hover:bg-button-hover hover:text-button-text-hover"
+          (click)="previousStep()"
+        >
+          Previous
+        </button>
+      }
+      @if (currentStepIndex !== formData().steps.length - 1) {
+        <button
+          type="button"
+          class="bg-button px-8 py-3 font-semibold text-button-text hover:bg-button-hover hover:text-button-text-hover"
+          (click)="nextStep()"
+        >
+          Next
+        </button>
+      }
+      @if (currentStepIndex === formData().steps.length - 1) {
+        <button
+          class="border border-button-hover bg-transparent px-8 py-3 font-semibold text-secondary hover:bg-button-hover hover:text-button-text-hover"
+          type="submit"
+        >
+          Submit
+        </button>
+      }
+    </div>
+  }
+</form>

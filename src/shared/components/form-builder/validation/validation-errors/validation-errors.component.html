@@ -1,0 +1,3 @@
+@for (error of errors() | keyvalue; track error; let index = $index) {
+  <p [id]="id()" class="text-sm text-error">{{ getErrorMessage(error.key, error.value) }}</p>
+}

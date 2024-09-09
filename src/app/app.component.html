@@ -1,1 +1,8 @@
 <h1 class="text-secondary">This is heading</h1>
+<app-form-builder
+  [formData]="formData"
+  [activeStep]="{ stepAlias: activeStep() }"
+  (activeStepChange)="onChangeStep($event)"
+  (filesChange)="onFilesDrop($event)"
+>
+</app-form-builder>

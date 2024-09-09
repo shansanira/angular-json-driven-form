@@ -1968,6 +1968,20 @@
   resolved "https://registry.yarnpkg.com/@msgpackr-extract/msgpackr-extract-win32-x64/-/msgpackr-extract-win32-x64-3.0.3.tgz#0aa5502d547b57abfc4ac492de68e2006e417242"
   integrity sha512-x0fWaQtYp4E6sktbsdAqnehxDgEc/VwM7uLsRCYWaiGu0ykYdZPiS8zCWdnjHwyiumousxfBm4SO31eXqwEZhQ==
 
+"@ng-icons/core@^29.5.0":
+  version "29.5.0"
+  resolved "https://registry.yarnpkg.com/@ng-icons/core/-/core-29.5.0.tgz#e311ce6c149ae785c727da6424cea82e90b02130"
+  integrity sha512-MpM8I/7uzUC7SKRt29d4ByCpKjk8sXTlOiLuBCTHG1uyI14jUZdpyhBwpCpGKpkqqmfxDkvN848hjhFiOKlBuA==
+  dependencies:
+    tslib "^2.2.0"
+
+"@ng-icons/heroicons@^29.5.0":
+  version "29.5.0"
+  resolved "https://registry.yarnpkg.com/@ng-icons/heroicons/-/heroicons-29.5.0.tgz#092bd4462c71afbfafaf56ee21e8f9c4b2976086"
+  integrity sha512-v4u2/yaliPxh90haLR9dps2dbCmR5BeBi6l6P+YI4uv76LctmnSe9vOqqK16/Jt0FcXIY8ye35guVCXfyJqt+Q==
+  dependencies:
+    tslib "^2.2.0"
+
 "@ngtools/webpack@18.2.3":
   version "18.2.3"
   resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-18.2.3.tgz#81056a6f83818caf6acb0f4d385543912a9f30cd"
@@ -4186,6 +4200,11 @@ file-entry-cache@^9.0.0:
   integrity sha512-/pqPFG+FdxWQj+/WSuzXSDaNzxgTLr/OrR1QuqfEZzDakpdYE70PwUxL7BPUa8hpjbvY1+qvCl8k+8Tq34xJgg==
   dependencies:
     flat-cache "^5.0.0"
+
+filesize@^10.1.6:
+  version "10.1.6"
+  resolved "https://registry.yarnpkg.com/filesize/-/filesize-10.1.6.tgz#31194da825ac58689c0bce3948f33ce83aabd361"
+  integrity sha512-sJslQKU2uM33qH5nqewAwVB2QgR6w1aMNsYUp3aN5rMRyXEwJGmZvaWzeJFNTOXWlHQyBFCWrdj3fV/fsTOX8w==
 
 fill-range@^7.1.1:
   version "7.1.1"
@@ -7478,7 +7497,7 @@ tslib@2.6.3:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.6.3.tgz#0438f810ad7a9edcde7a241c3d80db693c8cbfe0"
   integrity sha512-xNvxJEOUiWPGhUuUdQgAJPKOOJfGnIyKySOc09XkKsgdUV/3E2zvwZYdejjmRgPCgcym1juLH3226yA7sEFJKQ==
 
-tslib@^2.0.0, tslib@^2.1.0, tslib@^2.3.0:
+tslib@^2.0.0, tslib@^2.1.0, tslib@^2.2.0, tslib@^2.3.0:
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.7.0.tgz#d9b40c5c40ab59e8738f297df3087bf1a2690c01"
   integrity sha512-gLXCKdN1/j47AiHiOkJN69hJmcbGTHI0ImLmbYLHykhgeN0jVGola9yVjFgzCUklsZQMW55o+dW7IXv3RCXDzA==

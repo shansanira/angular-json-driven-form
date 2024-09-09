@@ -1,0 +1,32 @@
+<div class="w-full rounded-lg border border-field-help p-6 pb-2 pt-2">
+  <button
+    type="button"
+    aria-describedby="toggle uploading file-list"
+    (click)="toggleExpanded()"
+    class="mb-3 flex cursor-pointer items-center text-field-label font-semibold hover:underline"
+  >
+    {{ 'Uploading' + files().length + 'files' }}
+    <ng-icon class="mt-1" [name]="isExpanded() ? 'heroChevronUp' : 'heroChevronDown'" size="20"></ng-icon>
+  </button>
+  @if (!isExpanded()) {
+    <app-progress-bar [value]="10"></app-progress-bar>
+  }
+  @if (isExpanded()) {
+    @for (file of files(); track file; let index = $index) {
+      <div class="mb-4 border-b border-field-help last:mb-0 last:border-none">
+        <div class="mb-2 flex w-full items-center justify-between">
+          <p class="text-base-100">{{ file.name }}</p>
+          <button
+            class="mt-1 flex items-center justify-center rounded-full p-1 hover:bg-base-25"
+            type="button"
+            attr.aria-label="Cancel upload the file {{ file.name }}"
+            (click)="cancelUpload(file)"
+          >
+            <ng-icon class="text-error" name="heroXMark" size="16"></ng-icon>
+          </button>
+        </div>
+        <app-progress-bar [value]="10"></app-progress-bar>
+      </div>
+    }
+  }
+</div>
