@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
   }
 
   onChangeStep(activeStepData: ActiveStepData) {
-    console.info('activeStepData', activeStepData);
+    this.formsService.setStep(activeStepData.stepAlias);
   }
 
   onFilesDrop(fieldValue: FieldWithFiles) {

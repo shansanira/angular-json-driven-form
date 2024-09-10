@@ -12,7 +12,7 @@ import { Subject, distinctUntilChanged, startWith, takeUntil, tap } from 'rxjs';
 import { SelectionField, TextField, UploadField } from '../models/form.model';
 
 @Directive({
-  selector: '[ipxControlValueAccessor]',
+  selector: '[appControlValueAccessor]',
   standalone: true,
 })
 export abstract class ControlValueAccessorDirective<T, F extends TextField | UploadField | SelectionField>
@@ -44,13 +44,18 @@ export abstract class ControlValueAccessorDirective<T, F extends TextField | Upl
           this.control = (formControl as FormControlDirective).form as FormControl;
           break;
       }
-    } catch (_error) {
+    } catch (error) {
+      console.error('Error getting form control', error);
       this.control = new FormControl();
     }
   }
 
   writeValue(value: T): void {
-    this.control ? this.control.setValue(value) : (this.control = new FormControl(value));
+    if (this.control) {
+      this.control.setValue(value);
+    } else {
+      this.control = new FormControl(value);
+    }
   }
 
   registerOnChange(onChange: (value: T) => void): void {

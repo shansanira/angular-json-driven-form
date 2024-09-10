@@ -33,7 +33,6 @@ export class FormBuilderComponent implements OnChanges {
   currentStepIndex = 0;
 
   ngOnChanges(): void {
-    console.info('formData', this.formData());
     this.createForm();
     this.currentStepIndex = this.formData().steps.findIndex(({ alias }) => alias === this.activeStep().stepAlias);
     console.log(this.currentStepIndex);
@@ -43,8 +42,6 @@ export class FormBuilderComponent implements OnChanges {
     const allFields: (TextField | UploadField | SelectionField)[] = this.formData().steps.flatMap((step) =>
       step.blocks.flatMap((block) => block.fields),
     );
-
-    console.log('allFields', allFields);
 
     allFields.forEach((field) => {
       const validators = getValidationErrors(field);
@@ -90,13 +87,7 @@ export class FormBuilderComponent implements OnChanges {
   nextStep(): void {
     let step = this.currentStepIndex;
     let stepFormData: Record<string, unknown> | undefined;
-
-    // pass stepFormData only if the form values have changed
-    if (JSON.stringify(this.oldStepValues) !== JSON.stringify(this.getCurrentStepFields())) {
-      stepFormData = this.getCurrentStepFields();
-    } else {
-      step = ++this.currentStepIndex;
-    }
+    step = ++this.currentStepIndex;
 
     if (this.isCurrentStepValid()) {
       this.activeStep.update((value) => ({

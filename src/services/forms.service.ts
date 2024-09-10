@@ -22,6 +22,10 @@ export class FormsService {
     this.selectedFormId.set(id);
   }
 
+  setStep(step: string): void {
+    this.activeStep.set(step);
+  }
+
   /**
    * Fetch the form data using the fetched form guid from the API
    */
