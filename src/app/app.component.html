@@ -1,8 +1,19 @@
-<h1 class="text-secondary">This is heading</h1>
-<app-form-builder
-  [formData]="formData"
-  [activeStep]="{ stepAlias: activeStep() }"
-  (activeStepChange)="onChangeStep($event)"
-  (filesChange)="onFilesDrop($event)"
->
-</app-form-builder>
+@if (error()) {
+  <div class="p-8">
+    <p class="text-error">{{ error() }}</p>
+  </div>
+} @else if (formData().steps.length <= 0) {
+  <div class="flex h-screen w-full items-center justify-center">
+    <p class="text-xl font-semibold">loading...</p>
+  </div>
+} @else {
+  <div class="w-full max-w-[500px] p-8">
+    <app-form-builder
+      [formData]="formData()"
+      [activeStep]="{ stepAlias: activeStep() }"
+      (activeStepChange)="onChangeStep($event)"
+      (filesChange)="onFilesDrop($event)"
+    >
+    </app-form-builder>
+  </div>
+}

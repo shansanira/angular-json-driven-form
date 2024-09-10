@@ -1,3 +1,4 @@
+import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnChanges, inject, input, model } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 
@@ -16,7 +17,7 @@ export interface ActiveStepData {
 @Component({
   selector: 'app-form-builder',
   standalone: true,
-  imports: [ReactiveFormsModule, TextFieldComponent, TextAreaComponent, FileUploaderComponent],
+  imports: [ReactiveFormsModule, TextFieldComponent, TextAreaComponent, FileUploaderComponent, JsonPipe],
   templateUrl: './form-builder.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -32,14 +33,18 @@ export class FormBuilderComponent implements OnChanges {
   currentStepIndex = 0;
 
   ngOnChanges(): void {
+    console.info('formData', this.formData());
     this.createForm();
     this.currentStepIndex = this.formData().steps.findIndex(({ alias }) => alias === this.activeStep().stepAlias);
+    console.log(this.currentStepIndex);
   }
 
   createForm(): void {
     const allFields: (TextField | UploadField | SelectionField)[] = this.formData().steps.flatMap((step) =>
       step.blocks.flatMap((block) => block.fields),
     );
+
+    console.log('allFields', allFields);
 
     allFields.forEach((field) => {
       const validators = getValidationErrors(field);

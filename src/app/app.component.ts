@@ -1,8 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { FormsService } from '../services/forms.service';
-import { formData } from '../shared/components/form-builder/form-builder-content';
 import { ActiveStepData, FormBuilderComponent } from '../shared/components/form-builder/form-builder.component';
 import { FieldWithFiles } from '../shared/components/form-builder/models/file-upload.model';
 
@@ -12,14 +11,19 @@ import { FieldWithFiles } from '../shared/components/form-builder/models/file-up
   imports: [RouterOutlet, FormBuilderComponent, FormBuilderComponent],
   templateUrl: './app.component.html',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   private formsService = inject(FormsService);
 
   activeStep = this.formsService.activeStep;
-  formData = formData;
+  formData = this.formsService.formdata;
+  error = this.formsService.error;
+
+  ngOnInit(): void {
+    this.formsService.setFormId(1);
+  }
 
   onChangeStep(activeStepData: ActiveStepData) {
-    this.formsService.updateForm(activeStepData);
+    console.info('activeStepData', activeStepData);
   }
 
   onFilesDrop(fieldValue: FieldWithFiles) {
