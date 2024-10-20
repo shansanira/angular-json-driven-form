@@ -1,0 +1,26 @@
+@if (control) {
+  <app-form-field
+    [formField]="formField()"
+    [showError]="control.invalid && control.touched && control.dirty"
+    [errors]="control.errors"
+  >
+    <select
+      [id]="formField().id"
+      [formControl]="control"
+      [ngClass]="[getErrorClass(), formField().readonly ? 'pointer-events-none' : '', isList() ? 'p-0' : '']"
+      [attr.aria-describedby]="getAriaDescribedBy()"
+      class="w-full appearance-none overflow-auto rounded-field"
+      [multiple]="isList() ? formField().multiple : false"
+      [size]="getInputSize()"
+    >
+      @if (!formField().validators.required) {
+        <option value="" class="px-3 py-2 checked:bg-base-35" selected>Choose an option</option>
+      }
+      @for (option of formField().options; track option.uniqueId; let index = $index) {
+        <option [value]="option.uniqueId" class="px-3 py-2 checked:bg-base-35">
+          {{ option.label }}
+        </option>
+      }
+    </select>
+  </app-form-field>
+}

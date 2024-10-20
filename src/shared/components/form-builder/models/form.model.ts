@@ -29,7 +29,7 @@ export interface Step {
 }
 
 export interface Block {
-  fields: (TextField | UploadField | SelectionField)[];
+  fields: FormFieldTypes[];
   alias: string;
   label: string;
   id: string;
@@ -74,8 +74,11 @@ export interface UploadField extends FieldDefinition<FieldType.UploadField, File
   maximumSize?: number;
 }
 
-export interface SelectionField extends FieldDefinition<FieldType.SelectionField, string> {
-  options?: Option[];
+export interface SelectionField extends FieldDefinition<FieldType.SelectionField, string | string[] | boolean> {
+  selectionDisplay: SelectionDisplay;
+  multiple: boolean;
+  options: Choice[];
+  isHorizontal: boolean;
 }
 
 export interface IValidators {
@@ -95,6 +98,26 @@ interface Extras {
 export interface Option {
   label: string;
   value: string;
+}
+
+export interface Choice {
+  selected: boolean;
+  sideValue: unknown;
+  id: string;
+  uniqueId: string;
+  label: string;
+  alias: string;
+  explanation: string;
+  excludeFromSubmit: boolean;
+  showInOutput: boolean;
+  showInOverview: boolean;
+  showInForm: boolean;
+  precondition: Precondition[];
+  displayHint: string;
+  values: unknown[];
+  custom1: unknown;
+  custom2: unknown;
+  custom3: unknown;
 }
 
 export interface Value {
@@ -118,3 +141,7 @@ export interface Postcondition {
 }
 
 type Result = 'none' | 'false' | 'true';
+
+export type SelectionDisplay = 'pulldown' | 'list' | 'box' | 'combo' | 'button';
+
+export type FormFieldTypes = TextField | UploadField | SelectionField;

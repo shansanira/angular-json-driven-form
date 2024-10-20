@@ -39,7 +39,8 @@ module.exports = {
       'container': 'var(--sys-color-container-background, var(--sys-color-base-0))',
       'container-outline': 'var(--sys-color-container-border, transparent)',
 
-      'field': 'var(--sys-color-field-border, var(--sys-color-primary))',
+      // used color-mix to calculate the color based on the alpha value (used in selection-button-group.component.html)
+      'field': 'color-mix(in srgb, var(--sys-color-field-border, var(--sys-color-primary)) calc(100% * <alpha-value>), transparent)',
       'field-help': 'var(--sys-color-field-help-text, var(--sys-color-text-body))',
       'label': 'var(--sys-color-field-label, var(--sys-color-primary))',
 

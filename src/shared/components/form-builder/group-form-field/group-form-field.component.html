@@ -1,0 +1,22 @@
+<fieldset class="mb-4 flex w-full flex-col">
+  <legend [id]="formField().id" class="mb-3 text-field-label font-field-label leading-base text-label">
+    {{ formField().label }}
+
+    @if (!formField().validators.required) {
+      <span class="font-base text-sm text-field-help">Optional</span>
+    }
+  </legend>
+  @if (formField().explanation) {
+    <p [id]="formField().id + '-help'" class="mb-2 text-help-text text-field-help">{{ formField().explanation }}</p>
+  }
+
+  <div class="flex w-full flex-wrap gap-2" [ngClass]="{ 'flex-col': !isHorizontal() }">
+    <ng-content></ng-content>
+  </div>
+
+  @if (showError()) {
+    <div class="ml-2">
+      <ipx-validation-errors [id]="formField().id + '-error'" [controlLabel]="formField().label" [errors]="errors()" />
+    </div>
+  }
+</fieldset>

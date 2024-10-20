@@ -16,6 +16,45 @@
                     <app-text-field [formField]="field" [formControlName]="field.name"></app-text-field>
                   }
                 }
+                @case ('SelectionField') {
+                  @switch (field.selectionDisplay) {
+                    @case ('box') {
+                      @if (field.multiple) {
+                        <app-checkbox-group
+                          [formField]="field"
+                          [formControlName]="field.name"
+                          [isHorizontal]="field.isHorizontal"
+                        ></app-checkbox-group>
+                      } @else {
+                        <app-radio-group
+                          [formField]="field"
+                          [formControlName]="field.name"
+                          [isHorizontal]="field.isHorizontal"
+                        ></app-radio-group>
+                      }
+                    }
+                    @case ('pulldown') {
+                      <app-select-dropdown
+                        [formField]="field"
+                        [formControlName]="field.name"
+                        [isList]="false"
+                      ></app-select-dropdown>
+                    }
+                    @case ('button') {
+                      <app-selection-button-group
+                        [formField]="field"
+                        [formControlName]="field.name"
+                      ></app-selection-button-group>
+                    }
+                    @case ('list') {
+                      <app-select-dropdown
+                        [formField]="field"
+                        [formControlName]="field.name"
+                        [isList]="true"
+                      ></app-select-dropdown>
+                    }
+                  }
+                }
                 @case ('UploadField') {
                   <app-file-uploader
                     [formField]="field"

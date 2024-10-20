@@ -2,7 +2,11 @@ import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnChanges, inject, input, model } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 
+import { CheckboxGroupComponent } from './fields/checkbox-group/checkbox-group.component';
 import { FileUploaderComponent } from './fields/file-uploader/file-uploader.component';
+import { RadioGroupComponent } from './fields/radio-group/radio-group.component';
+import { SelectDropdownComponent } from './fields/select-dropdown/select-dropdown.component';
+import { SelectionButtonGroupComponent } from './fields/selection-button-group/selection-button-group.component';
 import { TextAreaComponent } from './fields/text-area/text-area.component';
 import { TextFieldComponent } from './fields/text-field/text-field.component';
 import { FieldWithFiles } from './models/file-upload.model';
@@ -17,7 +21,17 @@ export interface ActiveStepData {
 @Component({
   selector: 'app-form-builder',
   standalone: true,
-  imports: [ReactiveFormsModule, TextFieldComponent, TextAreaComponent, FileUploaderComponent, JsonPipe],
+  imports: [
+    ReactiveFormsModule,
+    TextFieldComponent,
+    TextAreaComponent,
+    FileUploaderComponent,
+    JsonPipe,
+    CheckboxGroupComponent,
+    RadioGroupComponent,
+    SelectDropdownComponent,
+    SelectionButtonGroupComponent,
+  ],
   templateUrl: './form-builder.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

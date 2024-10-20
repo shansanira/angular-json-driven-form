@@ -1,0 +1,61 @@
+@if (control) {
+  <app-group-form-field
+    [formField]="formField()"
+    [showError]="control.invalid && control.touched && control.dirty"
+    [errors]="control.errors"
+    [isHorizontal]="isHorizontal() ?? false"
+  >
+    @for (option of formField().options; track option?.uniqueId; let index = $index) {
+      <div
+        class="flex flex-col rounded-md px-3 pb-2 pt-3"
+        [ngClass]="[isSelected(option.uniqueId) ? 'bg-base-25' : '']"
+      >
+        <div class="flex">
+          <input
+            type="radio"
+            [name]="formField().name"
+            [id]="option.uniqueId"
+            [value]="option.uniqueId"
+            [ngClass]="getErrorClass(!isOtherSelected)"
+            [readonly]="formField().readonly"
+            [attr.aria-describedby]="getAriaDescribedBy()"
+            (change)="toggleSelection(option.uniqueId)"
+            [checked]="isSelected(option.uniqueId)"
+            class="mt-[-2px] h-5 w-5 cursor-pointer align-top checked:bg-field checked:hover:bg-field focus:ring-field focus:ring-offset-1 checked:focus:bg-field"
+          />
+          <label
+            [for]="option.uniqueId"
+            class="ml-3 cursor-pointer leading-none text-label"
+            [ngClass]="{ 'w-full': isSelected(option.uniqueId) }"
+          >
+            {{ option.label }}
+            <div
+              [id]="option.uniqueId + '-explanation'"
+              [innerHtml]="option?.explanation"
+              class="selection-explanation mt-2 text-help-text text-field-help"
+            ></div>
+          </label>
+        </div>
+        @if (otherOptionId && isOtherSelected && isSelected(option.uniqueId)) {
+          <div class="flex items-center py-3">
+            <input
+              type="text"
+              class="w-full rounded-field"
+              [id]="formField().id"
+              [ngClass]="getInputBorderClass()"
+              [attr.aria-describedby]="getAriaDescribedBy()"
+              [(ngModel)]="customChoice"
+              (input)="inputValue()"
+              (keydown.enter)="updateValue()"
+              (blur)="updateValue()"
+              [attr.aria-label]="getOtherOptionLabel()"
+              required
+              #otherInputField
+              #customOptionControl="ngModel"
+            />
+          </div>
+        }
+      </div>
+    }
+  </app-group-form-field>
+}

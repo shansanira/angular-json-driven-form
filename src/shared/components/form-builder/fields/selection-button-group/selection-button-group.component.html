@@ -1,0 +1,24 @@
+@if (control) {
+  <app-group-form-field
+    [formField]="formField()"
+    [showError]="control.invalid && control.touched && control.dirty"
+    [errors]="control.errors"
+    [isHorizontal]="true"
+  >
+    @for (option of formField().options; track option?.uniqueId; let index = $index) {
+      <button
+        type="button"
+        [id]="option.uniqueId"
+        [name]="formField().name"
+        [value]="option.uniqueId"
+        [ngClass]="[getErrorClass(true, false), isSelected(option.uniqueId) ? 'bg-field/30 !border-field' : '']"
+        [disabled]="formField().readonly"
+        [attr.aria-describedby]="getAriaDescribedBy()"
+        (click)="toggleSelection(option.uniqueId)"
+        class="flex cursor-pointer rounded-field border bg-base-25 px-3 py-2 hover:border-field focus:ring-field focus:ring-offset-1"
+      >
+        {{ option.label }}
+      </button>
+    }
+  </app-group-form-field>
+}

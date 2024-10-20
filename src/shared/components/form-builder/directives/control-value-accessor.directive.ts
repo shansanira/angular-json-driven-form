@@ -9,13 +9,13 @@ import {
 } from '@angular/forms';
 import { Subject, distinctUntilChanged, startWith, takeUntil, tap } from 'rxjs';
 
-import { SelectionField, TextField, UploadField } from '../models/form.model';
+import { FormFieldTypes } from '../models/form.model';
 
 @Directive({
   selector: '[appControlValueAccessor]',
   standalone: true,
 })
-export abstract class ControlValueAccessorDirective<T, F extends TextField | UploadField | SelectionField>
+export abstract class ControlValueAccessorDirective<T, F extends FormFieldTypes>
   implements ControlValueAccessor, OnInit
 {
   control!: FormControl;
@@ -45,16 +45,19 @@ export abstract class ControlValueAccessorDirective<T, F extends TextField | Upl
           break;
       }
     } catch (error) {
-      console.error('Error getting form control', error);
       this.control = new FormControl();
+      console.error('Control is not defined', error);
     }
   }
 
   writeValue(value: T): void {
+    if (value === this.control?.value) {
+      return;
+    }
     if (this.control) {
       this.control.setValue(value);
     } else {
-      this.control = new FormControl(value);
+      throw new Error('Control is not defined');
     }
   }
 
@@ -77,10 +80,24 @@ export abstract class ControlValueAccessorDirective<T, F extends TextField | Upl
     this._isDisabled = disabled;
   }
 
-  getErrorClass(): string {
-    return this.control.invalid && this.control.touched && this.control.dirty ? 'border-error' : 'border-field';
+  /**
+   * get tailwind class based on the conditions to show error state or normal state of the filed
+   * @param customCondition any custom condition that needs to be checked for error class
+   * @param isBorder is the field border required
+   * @returns tailwind classes based on the conditions
+   */
+  getErrorClass(customCondition = true, isBorder = true): string {
+    return this.control.invalid && this.control.touched && this.control.dirty && customCondition
+      ? 'border-error'
+      : isBorder
+        ? 'border-field'
+        : 'border-transparent';
   }
 
+  /**
+   * map the explanation and error message to the form field with id
+   * @returns aria-describedby attribute value
+   */
   getAriaDescribedBy(): string {
     const ids = [];
     if (this.formField().explanation) {

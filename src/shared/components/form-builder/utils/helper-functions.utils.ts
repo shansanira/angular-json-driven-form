@@ -1,6 +1,7 @@
-import { ValidatorFn, Validators } from '@angular/forms';
+import { FormControl, ValidatorFn, Validators } from '@angular/forms';
 
 import { SelectionField, TextField, UploadField } from '../models/form.model';
+import { otherFieldValidator } from '../validation/validators/select-other-text-field.validator';
 
 /**
  * Applies a number pattern to the given value based on the specified type.
@@ -84,4 +85,36 @@ export function getValidationErrors(field: TextField | UploadField | SelectionFi
   }
 
   return validators;
+}
+
+/**
+ * updates the form control with dirty, touched and validity.
+ * @param control - The form control to update.
+ */
+export function updateFormControl(control: FormControl) {
+  control.markAsTouched();
+  control.markAsDirty();
+  control.updateValueAndValidity();
+}
+
+/**
+ * sets the custom choice error message and validates the custom choice.
+ * @param control main FormControl
+ * @param message string
+ * @param customOptionControl custom option FormControl
+ * @param isOtherSelected boolean
+ */
+export function validateCustomChoice(
+  control: FormControl,
+  message: string,
+  customOptionControl: FormControl,
+  isOtherSelected: boolean,
+) {
+  if (isOtherSelected && !customOptionControl.value) {
+    control.setValidators(otherFieldValidator(message, customOptionControl));
+    control.setErrors({ other: { message } });
+  } else {
+    control.setErrors(null);
+    control.clearValidators();
+  }
 }
